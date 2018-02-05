@@ -18,6 +18,18 @@ Just starting to populate the repositories.
 At the time of Basho's demise, work was under way to create the version of Riak described above.
 That work is the starting point for this project.
 
+### Why OTP-20?
+
+While OTP-18 and -19 provide the "modern" modules and interfaces that allow us to avoid most compatibility code, OTP-20 adds a few things that make life a lot easier:
+
+* [Distributed Erlang over TLS](http://erlang.org/doc/apps/ssl/ssl_distribution.html) can be configured with ***all*** TLS options - this makes `inet_tls_dist` viable in real-world production scenarios.
+* OS signals are handled reasonably, so applications have a chance to shut down cleanly.
+* NIFs can perform [whereis](http://erlang.org/doc/man/erl_nif.html#enif_whereis_pid) queries, allowing them to find and send messages to registered applications. Logging to [lager](https://github.com/erlang-lager/lager) is the most obvious use case for this functionality, but there are many more.
+* The new and improved [string](http://erlang.org/doc/man/string.html) module is, well, new and improved _(a lot!)_.
+* Dirty schedulers are finally official, crypto supports OpenSSL 1.1.x, and so much more ...
+
+> Some individual packages that don't benefit from any of the new features in OTP-20 will likely remain compatible with at least some prior releases.
+
 ### Targets
 
 1. Update the [R3R Rebar Plugin](https://github.com/rebar3riak/r3r_rebar_plugin) (forked from [Basho Rebar Tools](https://github.com/basho/basho_rebar_tools)) to not be specific to Basho development.
